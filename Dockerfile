@@ -12,9 +12,6 @@ ENV LANGUAGE en_US.UTF-8
 # Setup taskwarrior
 ADD . /root/code/
 WORKDIR /root/code/
-RUN git clean -dfx
-RUN git submodule init
-RUN git submodule update
 RUN cmake -DCMAKE_BUILD_TYPE=debug .
 RUN make -j2
 RUN make install
