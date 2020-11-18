@@ -1,0 +1,7 @@
+# action.yml
+name: 'Taskwarrior Ubuntu build'
+description: 'Build TW on Ubuntu 18.04'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+
