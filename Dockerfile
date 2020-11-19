@@ -1,24 +1,6 @@
-FROM ubuntu:18.04
+ARG IMAGE=ghcr.io/8-bit-fox/tw-ubuntu:18.04
+FROM $IMAGE
 
-RUN apt-get update
-RUN apt-get install -y build-essential cmake git uuid-dev libgnutls28-dev libfaketime
-RUN apt-get install -y python
+COPY entrypoint.sh /entrypoint.sh
 
-# Setup language environment
-ENV LC_ALL en_US.UTF-8
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US.UTF-8
-
-# Setup taskwarrior
-ADD . /root/code/
-WORKDIR /root/code/
-RUN cmake -DCMAKE_BUILD_TYPE=debug .
-RUN make -j2
-RUN make install
-RUN task --version
-
-# Setup tests
-WORKDIR /root/code/test/
-RUN make
-
-CMD ["bash", "-c", "./run_all -v ; cat all.log | grep 'not ok' ; ./problems"]
+ENTRYPOINT ["/entrypoint.sh"]
