@@ -1,14 +1,7 @@
-#!/bin/bash
-cd $GITHUB_WORKSPACE
-cmake -DCMAKE_BUILD_TYPE=debug .
-make -j2
-make install
-task --version
+#!/bin/sh -l
 
-# Setup tests
-cd $GITHUB_WORKSPACE/test/
-make
+IMAGE_VERSION=$1
 
-./run_all -v 
-cat all.log | grep 'not ok'
-./problems
+cd /docker-action
+echo "creating docker image on: $IMAGE_VERSION"
+docker build -t docker-action --build-arg IMAGE="$IMAGE_VERSION" . && docker run docker-action
