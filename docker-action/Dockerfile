@@ -1,4 +1,5 @@
-FROM ghcr.io/8-bit-fox/tw-ubuntu:18.04
+ARG IMAGE
+FROM ${IMAGE}
 
 COPY entrypoint.sh /entrypoint.sh
 

@@ -5,8 +5,9 @@ inputs:
   image:
     description: "Image used for build"
     required: true
-    default: "ubuntu"
+    default: "ghcr.io/8-bit-fox/tw-ubuntu:18.04"
 runs:
   using: 'docker'
-  image: 'Dockerfile-'${{ inputs.image }}
-
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.image }}
