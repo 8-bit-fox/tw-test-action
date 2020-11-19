@@ -1,7 +1,12 @@
 # action.yml
-name: 'Taskwarrior Ubuntu build'
-description: 'Build TW on Ubuntu 18.04'
+name: 'Taskwarrior'
+description: 'Build TW'
+inputs:
+  image:
+    description: "Image used for build"
+    required: true
+    default: "ubuntu"
 runs:
   using: 'docker'
-  image: 'Dockerfile'
+  image: 'Dockerfile-'${{ inputs.image }}
 
